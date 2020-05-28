@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 怎么描述一个元素的定位信息
+注册页面手机号输入
+	1.再注册页面
+	2.定位方式
+	3.定位置：mobliephone -->
+<pages>
+	<page name="注册页面">
+		<locator by="id" value="mobliephone" desc="手机号输入框"></locator>
+		<locator by="xpath" value="/div[1]/password" desc="密码"></locator>
+		<locator by="id" value="pwdconfirm" desc="验证码"></locator>
+		<locator by="id" value="tips" desc="提示信息"></locator>
+	</page>
+	
+		<page name="登陆页面">
+		<locator by="id" value="mobliephone" desc="手机号输入框"></locator>
+		<locator by="xpath" value="/div[1]/password" desc="密码"></locator>
+		<locator by="id" value="pwdconfirm" desc="验证码"></locator>
+		<locator by="id" value="tips" desc="提示信息"></locator>
+	</page>
+</pages>
