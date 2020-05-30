@@ -5,7 +5,7 @@
 	2.定位方式
 	3.定位置：mobliephone -->
 <pages>
-	<page name="注册页面">
+	<page name="com.lemon.auto.phoenix.testcase.RegisterTester">
 		<locator by="id" value="mobliephone" desc="手机号输入框"></locator>
 		<locator by="xpath" value="/div[1]/password" desc="密码"></locator>
 		<locator by="id" value="pwdconfirm" desc="验证码"></locator>

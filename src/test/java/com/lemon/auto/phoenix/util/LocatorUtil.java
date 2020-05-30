@@ -2,6 +2,7 @@ package com.lemon.auto.phoenix.util;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.jar.Attributes.Name;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -12,11 +13,24 @@ import com.gargoylesoftware.htmlunit.javascript.host.Map;
 import com.lemon.auto.phoenix.base.Locator;
 
 public class LocatorUtil {
+	
+	private static HashMap<String, HashMap<String, Locator>> pagesMap = new HashMap<String, HashMap<String,Locator>>();
 
-	public static HashMap<String, HashMap<String, Locator>> loadUiInfo() {
+	static {
+		loadUiInfo();
+	}
+
+	public static HashMap<String, Locator> getPageMapByPageName(String pageName) {
+		return pagesMap.get(pageName);
+	}
+	
+	public static Locator getLocator(String pageName, String desc) {
+		return pagesMap.get(pageName).get(desc);
+	}
+	
+	public static void loadUiInfo() {
 		SAXReader reader = new SAXReader();
 		//告诉我一个页面，我能知道这个页面的所有定位信息
-		HashMap<String, HashMap<String, Locator>> pagesMap = new HashMap<String, HashMap<String,Locator>>();
 		try {
 			//得到文档
 			Document document = reader.read(LocatorUtil.class.getResourceAsStream("/locators/locators.xml"));
@@ -56,7 +70,6 @@ public class LocatorUtil {
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
-		return pagesMap;
 	}
 	
 	
@@ -100,7 +113,7 @@ public class LocatorUtil {
 	
 	
 	public static void main(String[] args) {
-		HashMap<String, HashMap<String, Locator>> pagesMap = loadUiInfo();
+		//HashMap<String, HashMap<String, Locator>> pagesMap = loadUiInfo();
 		//System.out.println(pagesMap);
 		HashMap<String, Locator> locatorsMap = pagesMap.get("注册页面");
 		Locator locator = locatorsMap.get("手机号输入框");
