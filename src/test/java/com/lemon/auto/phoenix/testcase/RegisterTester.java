@@ -21,15 +21,15 @@ import com.lemon.auto.phoenix.util.PropertiesUtil;
 public class RegisterTester extends BastTester {
 	
 	@Test(dataProvider="getDatas")
-	public void test_success(String mobliephone, String password, String pwdconfirm) throws InterruptedException {		
+	public void test_success(String mobliephone, String password, String pwdconfirm, String expectedText) throws InterruptedException {		
 		to("registerUrl");
 		type(mobliephone, "手机号输入框");
 		type(password, "密码");
 		type(pwdconfirm, "验证码");		
 		click("登陆按钮");
 		Thread.sleep(2000);
-		String loginbtn = getText("提示信息");
-		Assert.assertNull(loginbtn);
+		assertTextPresent("提示信息", expectedText);
+
 		
 	}
 	

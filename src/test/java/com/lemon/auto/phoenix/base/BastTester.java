@@ -19,6 +19,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 
 public class BastTester {
@@ -73,25 +74,7 @@ public class BastTester {
 			WebDriverWait wait =  new WebDriverWait(driver, 3);
 			wait.until(new ExpectedCondition<WebElement>() {
 				public WebElement apply(WebDriver driver) {
-					By by = null;
-	/*				if ("id".equals(byStr)) {
-						by = By.id(value);
-					}else if ("name".equals(byStr)) {
-						by = By.name(value);
-					}else if ("xpath".equals(byStr)) {
-						by = By.xpath(value);
-					}else if ("cssSelector".equals(byStr)) {
-						by = By.cssSelector(value);
-					}else if ("linkText".equals(byStr)) {
-						by = By.linkText(value);
-					}else if ("partialLinkText".equals(byStr)) {
-						by = By.partialLinkText(value);
-					}else if ("tagName".equals(byStr)) {
-						by = By.tagName(value);
-					}else if ("className".equals(byStr)) {
-						by = By.className(value);
-					}*/
-							
+					By by = null;							
 					try {
 						//拿到字节码对象
 						Class<By> clazz = By.class;
@@ -110,8 +93,8 @@ public class BastTester {
 		
 		/**
 		 * 输入内容
-		 * @param content
-		 * @param keyword
+		 * @param content	输入的内容
+		 * @param keyword	元素定位的关键字
 		 */
 		public void type(String content, String keyword) {
 			logger.info("正在往 ["+ keyword +"] " + "输入内容为 + ["+ content +" ]");
@@ -120,7 +103,7 @@ public class BastTester {
 		
 		/**
 		 * 点击按钮
-		 * @param keyword
+		 * @param keyword	元素定位的关键字
 		 */
 		public void click(String keyword) {
 			logger.info("正在点击 ["+ keyword +"] ");
@@ -129,7 +112,7 @@ public class BastTester {
 		
 		/**
 		 * 获取元素文本
-		 * @param keyword
+		 * @param keyword	元素定位的关键字
 		 * @return  
 		 */
 		public String getText(String keyword) {
@@ -139,9 +122,59 @@ public class BastTester {
 		
 		/**
 		 * 获取url
-		 * @param Strkey
+		 * @param Strkey	使用的Url
 		 */
 		public void to(String Strkey) {
 			driver.get(PropertiesUtil.getUrl("baseUrl") + PropertiesUtil.getUrl(Strkey));
 		}
+		
+		/**
+		 * 刷新方法
+		 */
+		public void refresh() {
+			driver.navigate().refresh();
+		}
+		
+		/**
+		 * 后退方法
+		 */
+		public void back() {
+			driver.navigate().back();
+		}
+		
+		/**
+		 * 前进方法
+		 */
+		public void forward() {
+			driver.navigate().forward();;
+		}
+		
+		/**
+		 * 窗口最大化
+		 */
+		public void maximize() {
+			driver.manage().window().maximize();
+		}
+		
+		/**
+		 * 断言元素是否相等
+		 * @param keyword	元素定位的关键字
+		 * @param expectedText	期望的文本
+		 */
+		public void assertTextPresent(String keyword, String expectedText) {
+			String actualText = getText(keyword);
+			Assert.assertEquals(actualText, expectedText);
+		}
+		
+		/**
+		 * 断言元素文本是否包含期望的文本
+		 * @param keyword	元素定位的关键字
+		 * @param expectedText	期望的文本
+		 */
+		public void assertElementEditable(String keyword, String expectedText) {
+			String actualText = getText(keyword);
+			Assert.assertTrue(actualText.contains(expectedText));
+		}
+		
+		
 }
