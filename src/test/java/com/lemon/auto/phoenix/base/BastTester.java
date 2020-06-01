@@ -125,7 +125,7 @@ public class BastTester {
 		 * @param Strkey	使用的Url
 		 */
 		public void to(String Strkey) {
-			driver.get(PropertiesUtil.getUrl("baseUrl") + PropertiesUtil.getUrl(Strkey));
+			driver.get(PropertiesUtil.getUrl(Strkey));
 		}
 		
 		/**

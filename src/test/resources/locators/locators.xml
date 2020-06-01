@@ -6,10 +6,9 @@
 	3.定位置：mobliephone -->
 <pages>
 	<page name="com.lemon.auto.phoenix.testcase.RegisterTester">
-		<locator by="id" value="mobliephone" desc="手机号输入框"></locator>
-		<locator by="xpath" value="/div[1]/password" desc="密码"></locator>
-		<locator by="id" value="pwdconfirm" desc="验证码"></locator>
-		<locator by="id" value="tips" desc="提示信息"></locator>
+		<locator by="xpath" value="//*[@id='username']" desc="手机号输入框"></locator>
+		<locator by="xpath" value="//*[@id='password']" desc="密码"></locator>
+		<locator by="xpath" value="//*[@id='main']/form/div[4]/div/div/span/button" desc="登录按钮"></locator>
 	</page>
 	
 		<page name="登陆页面">

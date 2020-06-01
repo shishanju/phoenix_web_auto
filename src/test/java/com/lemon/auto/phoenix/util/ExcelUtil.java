@@ -152,6 +152,6 @@ public class ExcelUtil {
 	
 	
 	public static void main(String[] args) {
-		Object[][] datas = ExcelUtil.readExcel1("/testcase/订单详情.xlsx", 1);
+		Object[][] datas = ExcelUtil.readExcel1("/testcase/testcase.xlsx", 1);
 	}
 }

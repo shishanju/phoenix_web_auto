@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Siute" parallel="false">
-	<test name="rechargeTest">
-	<classes>
-		<class name="com.lemon.auto.phoenix.testcase.Tester"/>
-	</classes>
-	</test>
-	<parameter name="browserType" value="chrome"></parameter>
-	
-	<parameter name="dirverPath" value="src/test/resources/driver/IEDriverServer.exe"></parameter>
-	
-</suite>
- 
+  <test name="Demo">
+  	<classes> 
+   		<class name='com.lemon.auto.phoenix.testcase.RegisterTester'></class>
+  	</classes>
+  </test> <!-- Test -->
+  <parameter name='browserType' value='chrome'></parameter>
+  <parameter name='driverPath' value='C:\ziliao\new_folder\chromedriver.exe'></parameter>
+</suite> <!-- Suite -->s
