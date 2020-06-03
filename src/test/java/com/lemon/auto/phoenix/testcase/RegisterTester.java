@@ -1,5 +1,6 @@
 package com.lemon.auto.phoenix.testcase;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.io.IOException;
@@ -23,26 +24,24 @@ import com.lemon.auto.phoenix.util.PropertiesUtil;
 public class RegisterTester extends BastTester {
 	
 	@Test(dataProvider="getDatas")
-	public void test_success(String mobliephone, String password) throws InterruptedException {		
+	public void test(String mobliephone, String password,String  pwdconfirm, String expectedText) throws InterruptedException {		
+		maximize();
 		to("registerUrl");
 		type(mobliephone, "手机号输入框");
 		type(password, "密码");
-		//type(pwdconfirm, "验证码");		
-		click("登陆按钮");
+		type(pwdconfirm, "验证码");		
+		click("登录按钮");		
+		assertTextPresent("错误提示", expectedText);
 		Thread.sleep(2000);
-		//assertTextPresent("提示信息", expectedText);
-		assertNotNull("登录按钮");
-
+		click("错误提示信息确认按钮");
 		
 	}
 	
 	@DataProvider
 	public Object[][] getDatas() {
-		Object[][] datas = ExcelUtil.readExcel("/testcase/testcase.xlsx", 2);
+		Object[][] datas = ExcelUtil.readExcel("/testcase/testcase.xlsx", 1);
 		return datas;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(RegisterTester.class.getName());
-	}
+
 }

@@ -16,7 +16,52 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 public class ExcelUtil {
-//
+	
+	
+	public static void main(String[] args) {
+		//Object[][] datas = ExcelUtil.readExcel("/testcase/testcase.xlsx", 1);
+	}
+
+	
+	public static Object[][] readExcel(String excelPath, int sheetIndex){
+		//创建一个二维数组
+		Object[][] datas = null;
+		try {
+			InputStream inp = ExcelUtil.class.getResourceAsStream(excelPath);
+			Workbook workbook = WorkbookFactory.create(inp);
+			//获取所需要的sheet
+			Sheet sheet = workbook.getSheetAt(sheetIndex - 1); 
+			//得到所有的行，从0开始
+			int lastRowNum = sheet.getLastRowNum();
+			//把得到的值放在二维数组中
+			datas = new Object[lastRowNum][];
+			//循环遍历所有的行
+			for (int i = 1; i <= lastRowNum; i++) {
+				//得到每一列
+				Row row = sheet.getRow(i);
+				//得到每一列从1开始
+				int lastCellNum = row.getLastCellNum();
+				//创建一个一维数组把值放进去
+				Object[] cellValueArray = new Object[lastCellNum];
+				//遍历每一列的值
+				for (int j = 0; j < lastCellNum; j++) {
+					 Cell cell = row.getCell(j, MissingCellPolicy.CREATE_NULL_AS_BLANK);
+					 //设置每一列的属性
+					 cell.setCellType(CellType.STRING);
+					 //得到cellValue
+					 String cellValue = cell.getStringCellValue();
+					 //System.out.println(cellValue + ",");
+					 //赋值给一维数组
+					cellValueArray[j] = cellValue;
+				}
+				datas[i - 1] = cellValueArray;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return datas;
+	}
+	
 //	public static Object[][] readExcel(String excelPath, int sheetIndex, int startRow, int endRow, int startCell, int endCell) {
 //		Object[][] datas = new Object[endRow-startRow+1][endCell-startCell+1];
 //		try {
@@ -82,47 +127,8 @@ public class ExcelUtil {
 		}
 		return datas;
 	}*/
-	
-	public static Object[][] readExcel(String excelPath, int sheetIndex){
-		//创建一个二维数组
-		Object[][] datas = null;
-		try {
-			InputStream inp = ExcelUtil.class.getResourceAsStream(excelPath);
-			Workbook workbook = WorkbookFactory.create(inp);
-			//获取所需要的sheet
-			Sheet sheet = workbook.getSheetAt(sheetIndex - 1); 
-			//得到所有的行，从0开始
-			int lastRowNum = sheet.getLastRowNum();
-			//把得到的值放在二维数组中
-			datas = new Object[lastRowNum][];
-			//循环遍历所有的行
-			for (int i = 1; i <= lastRowNum; i++) {
-				//得到每一列
-				Row row = sheet.getRow(i);
-				//得到每一列从1开始
-				int lastCellNum = row.getLastCellNum();
-				//创建一个一维数组把值放进去
-				Object[] cellValueArray = new Object[lastCellNum];
-				//遍历每一列的值
-				for (int j = 0; j < lastCellNum; j++) {
-					 Cell cell = row.getCell(j, MissingCellPolicy.CREATE_NULL_AS_BLANK);
-					 //设置每一列的属性
-					 cell.setCellType(CellType.STRING);
-					 //得到cellValue
-					 String cellValue = cell.getStringCellValue();
-					 System.out.println(cellValue + ",");
-					 //赋值给一维数组
-					cellValueArray[j] = cellValue;
-				}
-				datas[i - 1] = cellValueArray;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return datas;
-	}
-	
-	public static Object[][] readExcel1(String excelPath, int sheetIndex) {
+
+/*	public static Object[][] readExcel1(String excelPath, int sheetIndex) {
 		InputStream inp = ExcelUtil.class.getResourceAsStream(excelPath);
 		Object[][] datas = null;
 		try {
@@ -149,9 +155,6 @@ public class ExcelUtil {
 		}
 		return datas;
 	}
-	
-	
-	public static void main(String[] args) {
-		Object[][] datas = ExcelUtil.readExcel1("/testcase/testcase.xlsx", 1);
-	}
+	*/
+
 }

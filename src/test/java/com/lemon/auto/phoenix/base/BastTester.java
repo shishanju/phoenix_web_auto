@@ -71,8 +71,8 @@ public class BastTester {
 			final String byStr = locator.getBy();
 			//定位值
 			final String value = locator.getValue();
-			WebDriverWait wait =  new WebDriverWait(driver, 3);
-			wait.until(new ExpectedCondition<WebElement>() {
+			WebDriverWait wait =  new WebDriverWait(driver, 5);
+			WebElement element = wait.until(new ExpectedCondition<WebElement>() {
 				public WebElement apply(WebDriver driver) {
 					By by = null;							
 					try {
@@ -83,13 +83,15 @@ public class BastTester {
 						//调用by方法
 						by = (By)byMethod.invoke(null, value);
 					} catch (Exception e) {
-						e.printStackTrace();
+						e.printStackTrace();						
 					}
 					return driver.findElement(by);
 				}
+				
 			});
-			return null;
+			return element;
 		}
+		
 		
 		/**
 		 * 输入内容
@@ -106,8 +108,8 @@ public class BastTester {
 		 * @param keyword	元素定位的关键字
 		 */
 		public void click(String keyword) {
-			logger.info("正在点击 ["+ keyword +"] ");
-			getElement(keyword);
+			//logger.info("正在点击 ["+ keyword +"] ");
+			getElement(keyword).click();
 		}
 		
 		/**
@@ -116,7 +118,7 @@ public class BastTester {
 		 * @return  
 		 */
 		public String getText(String keyword) {
-			logger.info("正在获取 ["+ keyword +"] " + "的文本");
+			//logger.info("正在获取 ["+ keyword +"] " + "的文本");
 			return getElement(keyword).getText();
 		}
 		
@@ -163,6 +165,7 @@ public class BastTester {
 		 */
 		public void assertTextPresent(String keyword, String expectedText) {
 			String actualText = getText(keyword);
+			System.out.println(actualText);
 			Assert.assertEquals(actualText, expectedText);
 		}
 		
@@ -175,6 +178,5 @@ public class BastTester {
 			String actualText = getText(keyword);
 			Assert.assertTrue(actualText.contains(expectedText));
 		}
-		
 		
 }

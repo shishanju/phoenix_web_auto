@@ -14,6 +14,16 @@ import com.lemon.auto.phoenix.base.Locator;
 
 public class LocatorUtil {
 	
+	
+	public static void main(String[] args) {
+		//HashMap<String, HashMap<String, Locator>> pagesMap = loadUiInfo();
+		//System.out.println(pagesMap);
+		HashMap<String, Locator> locatorsMap = pagesMap.get("com.lemon.auto.phoenix.testcase.RegisterTester");
+		Locator locator = locatorsMap.get("手机号输入框");
+		System.out.println(locator);
+	}
+	
+	
 	private static HashMap<String, HashMap<String, Locator>> pagesMap = new HashMap<String, HashMap<String,Locator>>();
 
 	static {
@@ -111,13 +121,5 @@ public class LocatorUtil {
 	*/
 	
 	
-	
-	public static void main(String[] args) {
-		//HashMap<String, HashMap<String, Locator>> pagesMap = loadUiInfo();
-		//System.out.println(pagesMap);
-		HashMap<String, Locator> locatorsMap = pagesMap.get("注册页面");
-		Locator locator = locatorsMap.get("手机号输入框");
-		System.out.println(locator);
-	}
-	
+
 }
