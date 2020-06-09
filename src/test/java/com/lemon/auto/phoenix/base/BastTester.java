@@ -62,6 +62,39 @@ public class BastTester {
 			return getElement(5, keyword);
 		}
 		
+		public WebElement getElement(String keyword, String pageName){
+			return getElement(5,keyword,  pageName);
+		}
+		
+		
+		public WebElement getElement(long timeOutInSeconds, String keyword, String pageName) {
+			HashMap<String, Locator> locatorMap = LocatorUtil.getPageMapByPageName(pageName);
+			
+			Locator locator = locatorMap.get(keyword);
+			//定位方式
+			final String byStr = locator.getBy();
+			//定位值
+			final String value = locator.getValue();
+			WebDriverWait wait =  new WebDriverWait(driver, 5);
+			WebElement element = wait.until(new ExpectedCondition<WebElement>() {
+				public WebElement apply(WebDriver driver) {
+					By by = null;							
+					try {
+						//拿到字节码对象
+						Class<By> clazz = By.class;
+						//获取方法名
+						Method byMethod = clazz.getMethod(byStr, String.class);
+						//调用by方法
+						by = (By)byMethod.invoke(null, value);
+					} catch (Exception e) {
+						e.printStackTrace();						
+					}
+					return driver.findElement(by);
+				}
+				
+			});
+			return element;
+		}
 		
 		public WebElement getElement(long timeOutInSeconds, String keyword) {
 			HashMap<String, Locator> locatorMap = LocatorUtil.getPageMapByPageName(this.getClass().getName());
@@ -91,7 +124,6 @@ public class BastTester {
 			});
 			return element;
 		}
-		
 		
 		/**
 		 * 输入内容

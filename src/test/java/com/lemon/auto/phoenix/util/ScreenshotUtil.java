@@ -14,7 +14,7 @@ import com.lemon.auto.phoenix.base.BastTester;
 
 public class ScreenshotUtil {
 	
-	public static void takeScreenshot(String screenshotDir) {
+	public static File takeScreenshot(String screenshotDir) {
 		
 	
 	//拿到driver
@@ -30,8 +30,10 @@ public class ScreenshotUtil {
 	File destFile = new File(screenshotDir+File.separator + fileName);
 	try {
 		FileUtils.copyFile(screenshotFile, destFile);
+		return destFile;
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
+	return null;
 	}
 }

@@ -7,7 +7,7 @@
   	</classes>
   </test> <!-- Test -->
   <parameter name='browserType' value='chrome'></parameter>
-  <parameter name='driverPath' value='D:\java\chromedriver.exe'></parameter>
+  <parameter name='driverPath' value='C:\ziliao\new_folder\chromedriver.exe'></parameter>
   <listeners>
   <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
   <listener class-name="com.lemon.auto.phoenix.listener.PhoenixListener"></listener>
